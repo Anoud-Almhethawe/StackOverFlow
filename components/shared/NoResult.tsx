@@ -2,8 +2,14 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { title } from "process";
-const NoResult = () => {
+
+interface Props {
+  title: string;
+  description: string;
+  link: string;
+  label: string;
+}
+const NoResult = ({ title, description, link, label }: Props) => {
   return (
     <div className=" mt-10 flex w-full flex-col items-center justify-center ">
       <Image
@@ -25,13 +31,13 @@ const NoResult = () => {
       <p className="body-regular text-dark500_light700 max-w-md text-center">
         {description}
       </p>
-      <Link href="/ask-question">
+      <Link href={link}>
         <Button
           className="paragraph-medium mt-5 min-h-[46px] rounded-lg
          bg-primary-500 px-4 py-3 text-light-900 hover:bg-primary-500
           dark:bg-primary-500 dark:text-light-900"
         >
-          Ask a Question
+          {label}
         </Button>
       </Link>
     </div>

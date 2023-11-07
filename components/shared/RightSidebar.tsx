@@ -6,25 +6,28 @@ import RenderTag from "./RenderTag";
 const RightSidebar = () => {
   const hotQuestions = [
     {
-      _id: 1,
+      _id: "1",
       title:
         "Would it be appropriate to point out an error in another paper during a referee report?",
     },
-    { _id: 2, title: "How can an airconditioning machine exist?" },
-    { _id: 3, title: "Interrogated every time crossing UK Border as citizen" },
-    { _id: 4, title: "Low digit addition generator" },
+    { _id: "2", title: "How can an airconditioning machine exist?" },
     {
-      _id: 5,
+      _id: "3",
+      title: "Interrogated every time crossing UK Border as citizen",
+    },
+    { _id: "4", title: "Low digit addition generator" },
+    {
+      _id: "5",
       title: "What is an example of 3 numbers that do not make up a vector?",
     },
   ];
 
   const popularTags = [
-    { _id: 1, name: "Next.js", totalQuestions: 20152 },
-    { _id: 1, name: "React.js", totalQuestions: 18493 },
-    { _id: 1, name: "Node.js", totalQuestions: 16269 },
-    { _id: 1, name: "Python", totalQuestions: 15121 },
-    { _id: 1, name: "Microsoft Azure", totalQuestions: 9429 },
+    { _id: "1", name: "Next.js", totalQuestions: 20152 },
+    { _id: "1", name: "React.js", totalQuestions: 18493 },
+    { _id: "1", name: "Node.js", totalQuestions: 16269 },
+    { _id: "1", name: "Python", totalQuestions: 15121 },
+    { _id: "1", name: "Microsoft Azure", totalQuestions: 9429 },
   ];
 
   return (
