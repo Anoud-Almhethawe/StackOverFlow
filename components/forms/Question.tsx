@@ -18,27 +18,44 @@ import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
-const Question = () => {
+import { useRouter, usePathname } from "next/navigation";
+
+interface Props {
+  mongouserId: string;
+}
+
+const Question = ({ mongouserId }: Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
   const type: any = "create";
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
       title: "",
       explanation: "",
-      tags: [""],
+      tags: [],
     },
   });
 
-  function onSubmit(values: z.infer<typeof QuestionSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmitting(true);
     console.log(values);
     try {
       // make an async call to your API -> create a question
-      // contain all form data
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongouserId),
+        path: pathname,
+      });
+
       // navigate to home page
+      router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -51,6 +68,7 @@ const Question = () => {
   ) => {
     if (e.key === "Enter" && field.name === "tags") {
       e.preventDefault();
+
       const tagInput = e.target as HTMLInputElement;
       const tagValue = tagInput.value.trim();
 
@@ -121,6 +139,8 @@ const Question = () => {
                     // @ts-ignore
                     (editorRef.current = editor)
                   }
+                  onBlur={field.onBlur}
+                  onEditorChange={content => field.onChange(content)}
                   initialValue=""
                   init={{
                     height: 350,
@@ -183,7 +203,7 @@ const Question = () => {
 
                   {field.value.length > 0 && (
                     <div className="flex-start mt-2.5 gap-2.5">
-                      {field.value.map(tag => (
+                      {field.value.map((tag: any) => (
                         <Badge
                           onClick={() => handleTagRemove(tag, field)}
                           key={tag}
