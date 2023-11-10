@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       picture: image_url,
     });
 
-    return NextResponse.json({ message: "OK", user: mongoUser });
+    return NextResponse.json({ message: "OK created", user: mongoUser });
   }
 
   if (eventType === "user.updated") {
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
       path: `/profile/${id}`,
     });
 
-    return NextResponse.json({ message: "OK", user: mongoUser });
+    return NextResponse.json({ message: "OK updated", user: mongoUser });
   }
 
   if (eventType === "user.deleted") {
@@ -95,7 +95,7 @@ export async function POST(req: Request) {
       clerkId: id!,
     });
 
-    return NextResponse.json({ message: "OK", user: deletedUser });
+    return NextResponse.json({ message: "OK deleted", user: deletedUser });
   }
 
   return NextResponse.json({ message: "OK" });
