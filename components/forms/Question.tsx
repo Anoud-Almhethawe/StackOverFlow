@@ -21,12 +21,14 @@ import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
 
 import { useRouter, usePathname } from "next/navigation";
+import { useTheme } from "@/context/ThemeProvider";
 
 interface Props {
   mongouserId: string;
 }
 
 const Question = ({ mongouserId }: Props) => {
+  const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -93,6 +95,7 @@ const Question = ({ mongouserId }: Props) => {
     const newTags = field.value.filter((t: string) => t !== tag);
     form.setValue("tags", newTags);
   };
+
   return (
     <Form {...form}>
       <form
@@ -127,12 +130,12 @@ const Question = ({ mongouserId }: Props) => {
           control={form.control}
           name="explanation"
           render={({ field }) => (
-            <FormItem className="flex w-full flex-col gap-3">
+            <FormItem className="flex w-full flex-col gap-3  ">
               <FormLabel className="paragraph-semibold text-dark400_light800">
                 Detailed explanation of your problem
                 <span className="text-primary-500">*</span>
               </FormLabel>
-              <FormControl className="mt-3.5">
+              <FormControl className=" mt-3.5">
                 <Editor
                   apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   onInit={(evt, editor) =>
@@ -172,6 +175,9 @@ const Question = ({ mongouserId }: Props) => {
                       "removeformat | help",
                     content_style:
                       "body { font-family:Inter,sans-serif; font-size:14px }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>
