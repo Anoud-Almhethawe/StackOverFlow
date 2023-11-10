@@ -57,44 +57,48 @@ export async function POST(req: Request) {
   const eventType = evt.type;
   console.log(eventType);
 
-  // create a new user in mongo database  when a user make signup by clerk : sync data using webhook
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
 
-    const mongouser = await createUser({
+    // Create a new user in your database
+    const mongoUser = await createUser({
       clerkId: id,
-      name: `${first_name}${last_name ? `' ' ${last_name}` : ""}`,
-      email: email_addresses[0].email_address,
+      name: `${first_name}${last_name ? ` ${last_name}` : ""}`,
       username: username!,
+      email: email_addresses[0].email_address,
       picture: image_url,
     });
 
-    return NextResponse.json({ message: "OK", user: mongouser });
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
-  // update user in mongo database when a user make update by clerk : sync data using webhook
+
   if (eventType === "user.updated") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
 
-    const updatedUser = await updateUser({
+    // Create a new user in your database
+    const mongoUser = await updateUser({
       clerkId: id,
       updateData: {
-        name: `${first_name}${last_name ? `' ' ${last_name}` : ""}`,
-        email: email_addresses[0].email_address,
+        name: `${first_name}${last_name ? ` ${last_name}` : ""}`,
         username: username!,
+        email: email_addresses[0].email_address,
         picture: image_url,
       },
       path: `/profile/${id}`,
     });
-    return NextResponse.json({ message: "OK", user: updatedUser });
+
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
-  // delete user in mongo database when a user make delete to account by clerk : sync data using webhook
+
   if (eventType === "user.deleted") {
     const { id } = evt.data;
+
     const deletedUser = await deleteUser({
       clerkId: id!,
     });
+
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
