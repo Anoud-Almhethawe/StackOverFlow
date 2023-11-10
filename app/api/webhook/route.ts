@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.NEXT_CLERK_WEBHOOK_SECRET;
 
-  if (!WEBHOOK_SECRET)  {
+  if (!WEBHOOK_SECRET) {
     throw new Error(
       "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
@@ -53,6 +53,8 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
+  console.log({ eventType });
+
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
@@ -66,7 +68,7 @@ export async function POST(req: Request) {
       picture: image_url,
     });
 
-    return NextResponse.json({ message: "OK created", user: mongoUser });
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
   if (eventType === "user.updated") {
@@ -85,7 +87,7 @@ export async function POST(req: Request) {
       path: `/profile/${id}`,
     });
 
-    return NextResponse.json({ message: "OK updated", user: mongoUser });
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
   if (eventType === "user.deleted") {
@@ -95,8 +97,8 @@ export async function POST(req: Request) {
       clerkId: id!,
     });
 
-    return NextResponse.json({ message: "OK deleted", user: deletedUser });
+    return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
-  return NextResponse.json({ message: "OK" });
+  return new Response("", { status: 201 });
 }
