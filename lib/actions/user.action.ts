@@ -2,6 +2,7 @@
 
 import User from "../database/User.model";
 import { connectToDatabase } from "../mongoose";
+import { GetAllUsersParams } from "./shared.types";
 
 export async function getUserById(params: any) {
   try {
@@ -9,6 +10,18 @@ export async function getUserById(params: any) {
     const { userId } = params;
     const user = await User.findOne({ clearkId: userId });
     return user;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getAllUsers(params: GetAllUsersParams) {
+  try {
+    connectToDatabase();
+    // const { page = 1, pageSize = 20, filter, searchQuery } = params;
+    const users = await User.find({}).sort({ createdAt: -1 });
+    return { users };
   } catch (error) {
     console.log(error);
     throw error;
