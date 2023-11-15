@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import type { WebhookEvent } from "@clerk/clerk-sdk-node";
+import { WebhookEvent } from "@clerk/nextjs/server";
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.action";
 import { NextResponse } from "next/server";
 
@@ -51,17 +51,13 @@ export async function POST(req: Request) {
     });
   }
 
-  // Get the ID and type
-  const { id } = evt.data;
   const eventType = evt.type;
 
-  console.log("event type", eventType, event);
+  console.log({ eventType });
 
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
-
-    console.log("eventData", evt.data);
 
     // Create a new user in your database
     const mongoUser = await createUser({
@@ -104,7 +100,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log("Webhook body:", body);
   return new Response("", { status: 201 });
 }
