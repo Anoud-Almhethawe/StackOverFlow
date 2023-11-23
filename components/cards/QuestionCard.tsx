@@ -33,7 +33,6 @@ const QuestionCard = ({
           </span>
           <Link href={`/question/${_id}`}>
             <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1 ">
-              {" "}
               {title}
             </h3>
           </Link>
@@ -49,8 +48,8 @@ const QuestionCard = ({
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgUrl="/assets/icons/avatar.svg"
-          alt="user"
+          imgUrl={author.picture}
+          alt="author"
           value={author.name}
           href={`/profile/${author._id}`}
           isAuthor
