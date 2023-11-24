@@ -3,7 +3,7 @@ import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
 
 import RenderTag from "@/components/shared/RenderTag";
-import Votes from "@/components/shared/Votes";
+// import Votes from "@/components/shared/Votes";
 import Answer from "@/database/Answer.model";
 import { getQuestionById } from "@/lib/actions/question.action";
 
@@ -45,7 +45,7 @@ const Page = async ({ params, searchParams }: any) => {
             </p>
           </Link>
           <div className="flex justify-end">
-            <Votes
+            {/* <Votes
               type="Question"
               itemId={JSON.stringify(result._id)}
               userId={JSON.stringify(mongoUser._id)}
@@ -54,7 +54,7 @@ const Page = async ({ params, searchParams }: any) => {
               downvotes={result.downvotes.length}
               hasdownVoted={result.downvotes.includes(mongoUser._id)}
               hasSaved={mongoUser?.saved.includes(result._id)}
-            />
+            /> */}
           </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">

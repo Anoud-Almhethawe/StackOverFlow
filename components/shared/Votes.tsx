@@ -9,6 +9,8 @@ import {
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+// import router from "next/router";
+// import { useEffect } from "react";
 
 interface Props {
   type: string;
@@ -96,12 +98,12 @@ const Votes = ({
     }
   };
 
-  //   useEffect(() => {
-  //     viewQuestion({
-  //       questionId: JSON.parse(itemId),
-  //       userId: userId ? JSON.parse(userId) : undefined,
-  //     });
-  //   }, [itemId, userId, pathname, router]);
+  // useEffect(() => {
+  //   viewQuestion({
+  //     questionId: JSON.parse(itemId),
+  //     userId: userId ? JSON.parse(userId) : undefined,
+  //   });
+  // }, [itemId, userId, pathname, router]);
 
   return (
     <div className="flex gap-5">
