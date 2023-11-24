@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import UserCard from "@/components/cards/UserCard";
 import Filters from "@/components/shared/Filters";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
