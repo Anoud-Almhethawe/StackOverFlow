@@ -56,7 +56,6 @@ export async function POST(req: Request) {
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
-    console.log(eventType);
 
     // Create a new user in your database
     const mongoUser = await createUser({
@@ -67,13 +66,13 @@ export async function POST(req: Request) {
       picture: image_url,
     });
 
-    return NextResponse.json({ message: "OK createUser", user: mongoUser });
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
   if (eventType === "user.updated") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
-    console.log(eventType);
+
     // Create a new user in your database
     const mongoUser = await updateUser({
       clerkId: id,
@@ -86,19 +85,18 @@ export async function POST(req: Request) {
       path: `/profile/${id}`,
     });
 
-    return NextResponse.json({ message: "OK updateUser", user: mongoUser });
+    return NextResponse.json({ message: "OK", user: mongoUser });
   }
 
   if (eventType === "user.deleted") {
     const { id } = evt.data;
-    console.log(eventType);
 
     const deletedUser = await deleteUser({
       clerkId: id!,
     });
 
-    return NextResponse.json({ message: "OK deleteUser", user: deletedUser });
+    return NextResponse.json({ message: "OK", user: deletedUser });
   }
 
-  return NextResponse.json({ message: "OK OK" });
+  return NextResponse.json({ message: "OK" });
 }

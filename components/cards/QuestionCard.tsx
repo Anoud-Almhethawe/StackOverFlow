@@ -50,7 +50,7 @@ const QuestionCard = ({
         <Metric
           imgUrl={author.picture}
           alt="author"
-          value={author.name}
+          value={author?.name}
           href={`/profile/${author._id}`}
           isAuthor
           title={`- asked ${getTimestamp(createdAt)}`}
