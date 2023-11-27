@@ -79,7 +79,7 @@ export async function ToggleSaveQuestion(params: ToggleSaveQuestionParams) {
     } else {
       await User.findByIdAndUpdate(
         userId,
-        { $setOnInsert: { saved: questionId } },
+        { $addToSet: { saved: questionId } },
         { new: true }
       );
     }
