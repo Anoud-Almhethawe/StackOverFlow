@@ -25,7 +25,6 @@ const Page = async ({ params, searchParams }: any) => {
   }
 
   const result = await getQuestionById({ questionId: params.id });
-  console.log("question", result);
 
   return (
     <>
