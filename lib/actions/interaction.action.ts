@@ -18,15 +18,15 @@ export async function viewQuestion(params: ViewQuestionParams) {
         question: questionId,
         action: "view",
       });
-      if (existingInteraction) {
-        console.log("user already view this question");
-      } else {
-        await Interaction.create({
-          userId,
-          questionId,
-          action: "view",
-        });
-      }
+
+      if (existingInteraction)
+        return console.log("user already view this question");
+
+      await Interaction.create({
+        userId,
+        questionId,
+        action: "view",
+      });
     }
   } catch (error) {
     console.error(error);
