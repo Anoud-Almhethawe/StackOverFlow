@@ -10,7 +10,7 @@ export async function viewQuestion(params: ViewQuestionParams) {
     connectToDatabase();
     const { questionId, userId } = params;
     await Question.findByIdAndUpdate(questionId, {
-      $inc: { view: 1 },
+      $inc: { views: 1 },
     });
     if (userId) {
       const existingInteraction = await Interaction.findOne({
