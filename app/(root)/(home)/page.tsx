@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import HomeFilters from "@/components/home/HomeFilters";
 import NoResult from "@/components/shared/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";

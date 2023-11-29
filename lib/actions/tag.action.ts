@@ -1,16 +1,15 @@
 "use server";
-import { ITag } from "./../../database/tag.model";
-import { FilterQuery } from "mongoose";
+import Question from "@/database/Question.model";
+import Tag, { ITag } from "@/database/tag.model";
 
-import User from "@/database/User.model";
+import { FilterQuery } from "mongoose";
 import { connectToDatabase } from "../mongoose";
 import {
+  GetTopInteractedTagsParams,
   GetAllTagsParams,
   GetQuestionsByTagIdParams,
-  GetTopInteractedTagsParams,
 } from "./shared.types";
-import Tag from "@/database/tag.model";
-import Question from "@/database/Question.model";
+import User from "@/database/User.model";
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
@@ -73,8 +72,10 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
       ],
     });
 
-    if (!tag) throw new Error("User not found");
-    const questions = await tag.questions;
+    if (!tag) {
+      throw new Error("User not found");
+    }
+    const questions = tag.questions;
     return { tagTitle: tag.name, questions };
   } catch (error) {
     console.log(error);
