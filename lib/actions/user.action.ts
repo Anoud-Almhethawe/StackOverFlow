@@ -1,5 +1,4 @@
 "use server";
-
 import Question from "@/database/Question.model";
 
 import { connectToDatabase } from "../mongoose";
@@ -8,6 +7,7 @@ import {
   DeleteUserParams,
   GetAllUsersParams,
   GetSavedQuestionsParams,
+  GetUserByIdParams,
   ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shared.types";
@@ -16,7 +16,7 @@ import User from "@/database/User.model";
 import Tag from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
 
-export async function getUserById(params: any) {
+export async function getUserById(params: GetUserByIdParams) {
   try {
     connectToDatabase();
 
