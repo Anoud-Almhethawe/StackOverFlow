@@ -15,6 +15,7 @@ import { revalidatePath } from "next/cache";
 import User from "@/database/User.model";
 import Tag from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
+import Answer from "@/database/Answer.model";
 
 export async function getUserById(params: GetUserByIdParams) {
   try {
@@ -160,6 +161,21 @@ export async function getAllUsers(params: GetAllUsersParams) {
     // const { page = 1, pageSize = 20, filter, searchQuery } = params;
     const users = await User.find({}).sort({ createdAt: -1 });
     return { users };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getUserInfo(params: GetUserByIdParams) {
+  try {
+    connectToDatabase();
+    const { userId } = params;
+    const user = await User.findOne({ userId });
+    if (!user) throw new Error("user not found");
+    const totalQuestions = await Question.countDocuments({ author: user._id });
+    const totalAnswers = await Answer.countDocuments({ author: user._id });
+    return { user, totalQuestions, totalAnswers };
   } catch (error) {
     console.log(error);
     throw error;
