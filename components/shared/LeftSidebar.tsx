@@ -11,7 +11,7 @@ import React from "react";
 const LeftSidebar = () => {
   const { userId } = useAuth();
   const pathname = usePathname();
-  console.log(pathname, "path name");
+
   return (
     <section
       className="background-light900_dark200 light-border custom-scrollbar shadow-light-300 sticky  
