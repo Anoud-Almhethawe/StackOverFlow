@@ -18,46 +18,59 @@ import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-import { createQuestion } from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
 
 interface Props {
   mongouserId: string;
+  Questiondetails?: string;
+  type?: string;
 }
 
-const Question = ({ mongouserId }: Props) => {
+const Question = ({ mongouserId, Questiondetails, type }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const type: any = "create";
+
+  const parseQuestiondetails = JSON.parse(Questiondetails || "");
+  const groupedTags = parseQuestiondetails.tags.map((tag: any) => tag.name);
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
-      title: "",
-      explanation: "",
-      tags: [],
+      title: parseQuestiondetails.title || "",
+      explanation: parseQuestiondetails.content || "",
+      tags: groupedTags || [],
     },
   });
 
   async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     setIsSubmitting(true);
-    console.log(values);
     try {
-      // make an async call to your API -> create a question
-      await createQuestion({
-        title: values.title,
-        content: values.explanation,
-        tags: values.tags,
-        author: JSON.parse(mongouserId),
-        path: pathname,
-      });
-
-      // navigate to home page
-      router.push("/");
+      if (type === "Edit") {
+        // edite question server action
+        await editQuestion({
+          questionId: parseQuestiondetails._id,
+          title: values.title,
+          content: values.explanation,
+          path: pathname,
+        });
+        router.push(`/question/${parseQuestiondetails._id}`);
+      } else {
+        // make an async call to your API -> create a question
+        await createQuestion({
+          title: values.title,
+          content: values.explanation,
+          tags: values.tags,
+          author: JSON.parse(mongouserId),
+          path: pathname,
+        });
+        // navigate to home page
+        router.push("/");
+      }
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -117,7 +130,7 @@ const Question = ({ mongouserId }: Props) => {
                   light-border-2 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
-              <FormDescription className="body-regular mt-2.5 text-light-500">
+              <FormDescription className="body-regular text-light-500 mt-2.5">
                 Be specific and imagine you&apos;re asking a question to another
                 person.
               </FormDescription>
@@ -144,7 +157,7 @@ const Question = ({ mongouserId }: Props) => {
                   }
                   onBlur={field.onBlur}
                   onEditorChange={content => field.onChange(content)}
-                  initialValue=""
+                  initialValue={parseQuestiondetails.content || ""}
                   init={{
                     height: 350,
                     menubar: false,
@@ -181,7 +194,7 @@ const Question = ({ mongouserId }: Props) => {
                   }}
                 />
               </FormControl>
-              <FormDescription className="body-regular mt-2.5 text-light-500">
+              <FormDescription className="body-regular text-light-500 mt-2.5">
                 Intrduce the problem and expand on what you put in the title.
                 Minimum 100 characters.
               </FormDescription>
@@ -203,6 +216,7 @@ const Question = ({ mongouserId }: Props) => {
                   <Input
                     onKeyDown={e => handleInputKeyDown(e, field)}
                     placeholder="add tags..."
+                    disabled={type === "Edit"}
                     className="no-focus paragraph-regular background-light900_dark300 
                   light-border-2 text-dark300_light700 min-h-[56px] border"
                   />
@@ -211,25 +225,31 @@ const Question = ({ mongouserId }: Props) => {
                     <div className="flex-start mt-2.5 gap-2.5">
                       {field.value.map((tag: any) => (
                         <Badge
-                          onClick={() => handleTagRemove(tag, field)}
+                          onClick={() =>
+                            type !== "Edit"
+                              ? handleTagRemove(tag, field)
+                              : () => {}
+                          }
                           key={tag}
                           className="subtle-medium background-light800_dark300 text-light400_light500 flex items-center justify-center gap-2 rounded-md border-none px-4 py-2 capitalize"
                         >
                           {tag}
-                          <Image
-                            src="/assets/icons/close.svg"
-                            alt="close icon"
-                            width={12}
-                            height={12}
-                            className="cursor-pointer object-contain invert-0 dark:invert "
-                          />
+                          {type !== "Edit" && (
+                            <Image
+                              src="/assets/icons/close.svg"
+                              alt="close icon"
+                              width={12}
+                              height={12}
+                              className="cursor-pointer object-contain invert-0 dark:invert "
+                            />
+                          )}
                         </Badge>
                       ))}
                     </div>
                   )}
                 </>
               </FormControl>
-              <FormDescription className="body-regular mt-2.5 text-light-500">
+              <FormDescription className="body-regular text-light-500 mt-2.5">
                 Add up to 5 tags to describe what your question is about. Start
                 typing to see suggestions.
               </FormDescription>
@@ -239,13 +259,13 @@ const Question = ({ mongouserId }: Props) => {
         />
         <Button
           type="submit"
-          className="primary-gradient w-fit !text-light-900"
+          className="primary-gradient !text-light-900 w-fit"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
-            <>{type === "edit" ? "Editting" : "Posting"}</>
+            <>{type === "Edit" ? "Editting" : "Posting"}</>
           ) : (
-            <>{type === "edit" ? "Edit Question" : "Ask a Question"}</>
+            <>{type === "Edit" ? "Edit Question" : "Ask a Question"}</>
           )}
         </Button>
       </form>
