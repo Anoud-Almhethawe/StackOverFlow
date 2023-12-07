@@ -29,7 +29,7 @@ const QuestionCard = ({
   createdAt,
 }: QuestionProps) => {
   const showActionButton = clerkId && clerkId === author.clerkId;
-  console.log(showActionButton);
+
   return (
     <div className="card-wrapper flex w-full flex-col rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
