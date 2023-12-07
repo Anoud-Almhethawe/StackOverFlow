@@ -17,7 +17,12 @@ import AnswersTab from "@/components/shared/AnswersTab";
 const page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
-
+  console.log("====================================");
+  console.log(params.id);
+  console.log("====================================");
+  console.log("====================================");
+  console.log(userInfo);
+  console.log("====================================");
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
