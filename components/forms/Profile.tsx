@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+
 import {
   Form,
   FormControl,
@@ -16,6 +18,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { updateUser } from "@/lib/actions/user.action";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   user: string;
@@ -24,6 +28,9 @@ interface Props {
 const Page = ({ user, clerkId }: Props) => {
   const parsedUser = JSON.parse(user);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const pathname = usePathname();
+  const route = useRouter();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof ProfileSchema>>({
     resolver: zodResolver(ProfileSchema),
@@ -35,21 +42,40 @@ const Page = ({ user, clerkId }: Props) => {
       bio: parsedUser.bio || "",
     },
   });
+
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof ProfileSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  async function onSubmit(values: z.infer<typeof ProfileSchema>) {
     setIsSubmitting(true);
-    console.log(values);
+    try {
+      await updateUser({
+        clerkId,
+        updateData: {
+          name: values.name,
+          username: values.username,
+          portfolioWebsite: values.portfolioLink,
+          location: values.location,
+          bio: values.bio,
+        },
+        path: pathname,
+      });
+      route.back();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mt-9 flex w-full flex-col gap-9"
+      >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="space-y-3">
               <FormLabel>
                 Full Name<span className="text-primary-500">*</span>
               </FormLabel>
@@ -57,9 +83,8 @@ const Page = ({ user, clerkId }: Props) => {
                 <Input
                   className="no-focus paragraph-regular light-border background-light700_dark300 text-dark300_light700 "
                   required
-                  placeholder="name"
+                  placeholder="your name"
                   {...field}
-                  value={parsedUser.name}
                 />
               </FormControl>
               <FormMessage />
@@ -77,11 +102,10 @@ const Page = ({ user, clerkId }: Props) => {
               </FormLabel>
               <FormControl>
                 <Input
-                  className="no-focus paragraph-regular light-border background-light700_dark300 text-dark300_light700 "
+                  className="no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 "
                   required
-                  placeholder="username"
+                  placeholder="your username"
                   {...field}
-                  value={parsedUser.username}
                 />
               </FormControl>
               <FormMessage />
@@ -94,13 +118,13 @@ const Page = ({ user, clerkId }: Props) => {
           name="portfolioLink"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>portfolioLink</FormLabel>
+              <FormLabel>portfolio Link</FormLabel>
               <FormControl>
                 <Input
+                  type="url"
                   className="no-focus paragraph-regular light-border background-light700_dark300 text-dark300_light700 "
-                  placeholder="portfolioLink"
+                  placeholder="your portfolio url"
                   {...field}
-                  value={parsedUser.portfolioLink}
                 />
               </FormControl>
               <FormMessage />
@@ -119,9 +143,8 @@ const Page = ({ user, clerkId }: Props) => {
               <FormControl>
                 <Input
                   className="no-focus paragraph-regular light-border background-light700_dark300 text-dark300_light700 "
-                  placeholder="location"
+                  placeholder="where are you from? "
                   {...field}
-                  value={parsedUser.location}
                 />
               </FormControl>
               <FormMessage />
@@ -137,11 +160,10 @@ const Page = ({ user, clerkId }: Props) => {
                 Bio<span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
-                <textarea
-                  className="no-focus paragraph-regular light-border background-light700_dark300 text-dark300_light700 "
+                <Textarea
+                  className="no-focus paragraph-regular light-border background-light700_dark300 text-dark300_light700 min-h-[56px] border "
                   placeholder="What's special about you?..."
                   {...field}
-                  value={parsedUser.bio}
                 />
               </FormControl>
               <FormMessage />
@@ -149,14 +171,16 @@ const Page = ({ user, clerkId }: Props) => {
           )}
         />
 
-        <Button
-          type="submit"
-          className="primary-gradient !text-light-900 w-fit"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Saving..." : "Save"}
-          Edit
-        </Button>
+        <div className="mt-7 flex justify-end">
+          <Button
+            type="submit"
+            className="primary-gradient !text-light-900 w-fit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Saving..." : "Save"}
+            Edit
+          </Button>
+        </div>
       </form>
     </Form>
   );
