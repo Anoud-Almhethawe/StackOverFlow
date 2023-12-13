@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 "use client";
 import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -25,24 +26,26 @@ import { useTheme } from "@/context/ThemeProvider";
 
 interface Props {
   mongouserId: string;
-  Questiondetails?: string;
+  questionDetails?: string;
   type?: string;
 }
 
-const Question = ({ mongouserId, Questiondetails, type }: Props) => {
+const Question = ({ mongouserId, questionDetails, type }: Props) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
-  const parseQuestiondetails = JSON.parse(Questiondetails || "");
-  const groupedTags = parseQuestiondetails.tags.map((tag: any) => tag.name);
+  const parsedQuestionDetails =
+    questionDetails && JSON.parse(questionDetails || "");
+  const groupedTags = parsedQuestionDetails?.tags.map((tag: any) => tag.name);
+
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
     defaultValues: {
-      title: parseQuestiondetails.title || "",
-      explanation: parseQuestiondetails.content || "",
+      title: parsedQuestionDetails?.title || "",
+      explanation: parsedQuestionDetails?.content || "",
       tags: groupedTags || [],
     },
   });
@@ -53,12 +56,12 @@ const Question = ({ mongouserId, Questiondetails, type }: Props) => {
       if (type === "Edit") {
         // edite question server action
         await editQuestion({
-          questionId: parseQuestiondetails._id,
+          questionId: parsedQuestionDetails._id,
           title: values.title,
           content: values.explanation,
           path: pathname,
         });
-        router.push(`/question/${parseQuestiondetails._id}`);
+        router.push(`/question/${parsedQuestionDetails?._id}`);
       } else {
         // make an async call to your API -> create a question
         await createQuestion({
@@ -157,7 +160,7 @@ const Question = ({ mongouserId, Questiondetails, type }: Props) => {
                   }
                   onBlur={field.onBlur}
                   onEditorChange={content => field.onChange(content)}
-                  initialValue={parseQuestiondetails.content || ""}
+                  initialValue={parsedQuestionDetails?.content || ""}
                   init={{
                     height: 350,
                     menubar: false,
