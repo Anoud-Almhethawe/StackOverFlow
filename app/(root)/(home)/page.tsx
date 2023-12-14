@@ -9,9 +9,12 @@ import { HomePageFilters } from "@/constants/filters";
 import Link from "next/link";
 import React from "react";
 import { getQuestions } from "@/lib/actions/question.action";
+import { SearchParamsProps } from "@/types";
 
-const Home = async () => {
-  const result = await getQuestions({});
+const Home = async ({ searchParams }: SearchParamsProps) => {
+  const result = await getQuestions({ searchQuery: searchParams.q });
+  console.log(searchParams, "searchParams");
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center ">
@@ -22,7 +25,6 @@ const Home = async () => {
           </Button>
         </Link>
       </div>
-
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
           route="/"
@@ -37,9 +39,7 @@ const Home = async () => {
           containerClasses="hidden max-md:flex"
         />
       </div>
-
       <HomeFilters />
-
       <div className="mt-10 flex w-full flex-col gap-[24px]">
         {result.questions.length > 0 ? (
           result.questions.map(question => (
