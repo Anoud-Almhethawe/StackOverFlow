@@ -20,7 +20,7 @@ import Interaction from "@/database/Interaction.model";
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
     const query: FilterQuery<typeof Question> = {};
 
     if (searchQuery) {
