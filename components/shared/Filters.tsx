@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Select,
@@ -7,6 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { formUrlQuery } from "@/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   filters: {
@@ -17,9 +20,23 @@ interface Props {
   containerClasses?: string;
 }
 const Filters = ({ filters, otherclasses, containerClasses }: Props) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const paramFilter = searchParams.get("filter");
+  const handleUpdateParams = (value: string) => {
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: "filter",
+      value,
+    });
+    router.push(newUrl, { scroll: false });
+  };
   return (
     <div className={`relative ${containerClasses}`}>
-      <Select>
+      <Select
+        onValueChange={handleUpdateParams}
+        defaultValue={paramFilter || undefined}
+      >
         <SelectTrigger
           className={`${otherclasses} body-regular light-border 
           background-light800_dark300 text-dark500_light700 border px-5 py-2.5`}
@@ -28,10 +45,14 @@ const Filters = ({ filters, otherclasses, containerClasses }: Props) => {
             <SelectValue placeholder="Select a filter" />
           </div>
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="text-dark500_light700 small-regular bg-light-900 dark:bg-dark-300 border-none">
           <SelectGroup>
             {filters.map(filter => (
-              <SelectItem key={filter.value} value={filter.value}>
+              <SelectItem
+                key={filter.value}
+                value={filter.value}
+                className="focus:bg-light-800 dark:focus:bg-dark-400 cursor-pointer"
+              >
                 {filter.name}
               </SelectItem>
             ))}

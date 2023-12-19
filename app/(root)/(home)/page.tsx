@@ -17,6 +17,7 @@ const Home = async ({ searchParams }: SearchParamsProps) => {
     filter: searchParams.filter,
   });
 
+  // Fetch recommended Questions
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center ">

@@ -10,7 +10,10 @@ import Link from "next/link";
 import React from "react";
 
 const page = async ({ searchParams }: SearchParamsProps) => {
-  const result = await getAllUsers({ searchQuery: searchParams.q });
+  const result = await getAllUsers({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+  });
   return (
     <>
       <h1 className="h1-bold text-dark100_light900 ">All Users</h1>
@@ -29,7 +32,6 @@ const page = async ({ searchParams }: SearchParamsProps) => {
         <Filters
           filters={UserFilters}
           otherclasses="min-h-[56px] sm:min-w-[170px]"
-          containerClasses="hidden max-md:flex"
         />
       </div>
 
