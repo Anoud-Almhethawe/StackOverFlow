@@ -10,6 +10,7 @@ import React from "react";
 
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import Pagination from "@/components/shared/Pagination";
 
 const page = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();
@@ -18,6 +19,7 @@ const page = async ({ searchParams }: SearchParamsProps) => {
     clerkId: userId,
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -62,6 +64,12 @@ const page = async ({ searchParams }: SearchParamsProps) => {
             label="Ask Question"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </>
   );
