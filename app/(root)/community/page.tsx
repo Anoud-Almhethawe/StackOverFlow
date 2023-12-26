@@ -1,6 +1,7 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import UserCard from "@/components/cards/UserCard";
 import Filters from "@/components/shared/Filters";
+import Pagination from "@/components/shared/Pagination";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
@@ -13,6 +14,7 @@ const page = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -41,12 +43,18 @@ const page = async ({ searchParams }: SearchParamsProps) => {
         ) : (
           <div className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
             <p> No users yet</p>
-            <Link href="/sign-up" className="text-accent-blue mt-1 font-bold">
+            <Link href="/sign-up" className="mt-1 font-bold text-accent-blue">
               Join to be the first!
             </Link>
           </div>
         )}
       </section>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
+      </div>
     </>
   );
 };
