@@ -7,12 +7,12 @@ import { TagFilters } from "@/constants/filters";
 import React from "react";
 
 import { getQuestionsByTagId } from "@/lib/actions/tag.action";
+import Pagination from "@/components/shared/Pagination";
 const Page = async ({ params, searchParams }: any) => {
   const result = await getQuestionsByTagId({
     tagId: params.id,
     searchQuery: searchParams.q,
-    page: 1,
-    pageSize: 10,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -58,6 +58,12 @@ const Page = async ({ params, searchParams }: any) => {
             label="Ask Question"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </>
   );
