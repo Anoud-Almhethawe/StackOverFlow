@@ -10,7 +10,7 @@ const HomeFilters = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [active, setActive] = useState("");
-  const handletype = (item: any) => {
+  const handleTypeClick = (item: string) => {
     if (active === item) {
       setActive("");
       const newUrl = formUrlQuery({
@@ -42,7 +42,7 @@ const HomeFilters = () => {
             : "bg-light-800 text-light-500"
         }
          dark:bg-dark-300 dark:hover:bg-dark-200  `}
-          onClickCapture={() => handletype(item.value)}
+          onClickCapture={() => handleTypeClick(item.value)}
         >
           {item.name}
         </Button>
