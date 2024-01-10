@@ -14,6 +14,37 @@ import User from "@/database/User.model";
 import Answer from "@/database/Answer.model";
 import Interaction from "@/database/Interaction.model";
 
+// export async function createAnswer(params: CreateAnswerParams) {
+//   try {
+//     connectToDatabase();
+
+//     const { content, author, question, path } = params;
+
+//     const newAnswer = await Answer.create({ content, author, question });
+
+//     // Add the answer to the question's answers array
+//     const questionObject = await Question.findByIdAndUpdate(question, {
+//       $push: { answers: newAnswer._id },
+//     });
+
+//     // Todo: add interaction ...
+//     await Interaction.create({
+//       userId: author,
+//       action: "answer",
+//       question,
+//       answer: newAnswer._id,
+//       tags: questionObject.tags,
+//     });
+
+//     await User.findByIdAndUpdate(author, { $inc: { reputation: 10 } });
+
+//     revalidatePath(path);
+//   } catch (error) {
+//     console.log(error);
+//     throw error;
+//   }
+// }
+
 export async function createAnswer(params: CreateAnswerParams) {
   try {
     connectToDatabase();
@@ -27,9 +58,8 @@ export async function createAnswer(params: CreateAnswerParams) {
       $push: { answers: newAnswer._id },
     });
 
-    // Todo: add interaction ...
     await Interaction.create({
-      userId: author,
+      user: author,
       action: "answer",
       question,
       answer: newAnswer._id,
