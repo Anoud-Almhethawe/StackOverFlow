@@ -56,7 +56,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
-
         editor.setContent("");
       }
       // Toast....
