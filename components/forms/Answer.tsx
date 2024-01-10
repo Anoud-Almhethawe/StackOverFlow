@@ -56,12 +56,13 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
+
         editor.setContent("");
       }
       // Toast....
       return toast({
         title: "Answer Posted",
-        description: "Your answer has been successfully posted.",
+        description: "The answer has successfully Posted.",
       });
     } catch (error) {
       console.log(error);
