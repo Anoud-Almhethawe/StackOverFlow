@@ -23,6 +23,7 @@ import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   mongouserId: string;
@@ -62,6 +63,10 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
           path: pathname,
         });
         router.push(`/question/${parsedQuestionDetails?._id}`);
+        return toast({
+          title: "Question Edited",
+          description: "Your question has been successfully Edited.",
+        });
       } else {
         // make an async call to your API -> create a question
         await createQuestion({
@@ -73,6 +78,10 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
         });
         // navigate to home page
         router.push("/");
+        return toast({
+          title: "Question Posted",
+          description: "Your question has been successfully posted.",
+        });
       }
     } catch (error) {
     } finally {
@@ -133,7 +142,7 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
                   light-border-2 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
-              <FormDescription className="body-regular text-light-500 mt-2.5">
+              <FormDescription className="body-regular mt-2.5 text-light-500">
                 Be specific and imagine you&apos;re asking a question to another
                 person.
               </FormDescription>
@@ -197,7 +206,7 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
                   }}
                 />
               </FormControl>
-              <FormDescription className="body-regular text-light-500 mt-2.5">
+              <FormDescription className="body-regular mt-2.5 text-light-500">
                 Intrduce the problem and expand on what you put in the title.
                 Minimum 100 characters.
               </FormDescription>
@@ -252,7 +261,7 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
                   )}
                 </>
               </FormControl>
-              <FormDescription className="body-regular text-light-500 mt-2.5">
+              <FormDescription className="body-regular mt-2.5 text-light-500">
                 Add up to 5 tags to describe what your question is about. Start
                 typing to see suggestions.
               </FormDescription>
@@ -262,7 +271,7 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
         />
         <Button
           type="submit"
-          className="primary-gradient !text-light-900 w-fit"
+          className="primary-gradient w-fit !text-light-900"
           disabled={isSubmitting}
         >
           {isSubmitting ? (

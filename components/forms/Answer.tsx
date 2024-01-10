@@ -20,6 +20,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnswerSchema } from "@/lib/validations";
 import { createAnswer } from "@/lib/actions/answer.action";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   question: string;
@@ -58,6 +59,11 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
         editor.setContent("");
       }
+      // Toast....
+      return toast({
+        title: "Answer Posted",
+        description: "Your answer has been successfully posted.",
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,6 +86,9 @@ const Answer = ({ question, questionId, authorId }: Props) => {
       );
 
       const aiAnswer = await response.json();
+      console.log(aiAnswer.reply, "response");
+
+      alert(aiAnswer.reply);
 
       // Convert plain text to HTML format
 
@@ -90,7 +99,12 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         editor.setContent(formattedAnswer);
       }
 
-      // Toast...
+      // Toast....
+      return toast({
+        title: "AI Answer Generated",
+        description:
+          "The AI has successfully generated an answer based on your question",
+      });
     } catch (error) {
       console.log(error);
     } finally {
@@ -106,11 +120,11 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         </h4>
 
         <Button
-          className="btn light-border-2 text-primary-500 dark:text-primary-500 gap-1.5 rounded-md px-4 py-2.5 shadow-none"
+          className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
           onClick={generateAIAnswer}
         >
           {isSubmittingAI ? (
-            <>Generating...</>
+            <> Generating... </>
           ) : (
             <>
               <Image
