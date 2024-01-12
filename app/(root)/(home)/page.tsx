@@ -18,7 +18,7 @@ import type { Metadata } from "next";
 import { auth } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
-  title: "Home | DevFlow",
+  title: "Home | DevFlow ",
 };
 const Home = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();
