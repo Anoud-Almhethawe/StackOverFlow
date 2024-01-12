@@ -84,7 +84,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       const aiAnswer = await response.json();
 
-      alert(aiAnswer.reply);
+      alert("This Service desaibled now...");
 
       // Convert plain text to HTML format
 
