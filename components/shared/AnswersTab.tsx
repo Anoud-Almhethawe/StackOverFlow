@@ -13,6 +13,8 @@ const AnswersTab = async ({ userId, clerkId, searchParams }: Props) => {
     page: searchParams.page ? +searchParams.page : 1,
   });
 
+  console.log(result);
+
   return (
     <>
       {result.answers.map(answer => (

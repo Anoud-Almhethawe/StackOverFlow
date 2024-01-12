@@ -17,7 +17,7 @@ import { useTheme } from "@/context/ThemeProvider";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { AnswerSchema } from "@/lib/validations";
 import { createAnswer } from "@/lib/actions/answer.action";
 import { toast } from "../ui/use-toast";
@@ -30,7 +30,6 @@ interface Props {
 
 const Answer = ({ question, questionId, authorId }: Props) => {
   const pathname = usePathname();
-  const route = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmittingAI, setSetIsSubmittingAI] = useState(false);
   const { mode } = useTheme();
@@ -52,9 +51,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         question: JSON.parse(questionId),
         path: pathname,
       });
-
       form.reset();
-
       if (editorRef.current) {
         const editor = editorRef.current as any;
         editor.setContent("");
@@ -64,7 +61,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         title: "Answer Posted",
         description: "The answer has successfully Posted.",
       });
-      route.push(`/question/${JSON.parse(questionId)}`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -87,7 +83,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
       );
 
       const aiAnswer = await response.json();
-      console.log(aiAnswer.reply, "response");
 
       alert(aiAnswer.reply);
 
@@ -116,7 +111,7 @@ const Answer = ({ question, questionId, authorId }: Props) => {
   return (
     <div>
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
-        <h4 className="paragraph-semibold text-dark400_light800">
+        <h4 className="paragraph-semibold text-dark400_light800 mt-5">
           Write your answer here
         </h4>
 

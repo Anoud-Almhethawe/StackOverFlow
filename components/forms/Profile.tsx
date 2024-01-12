@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { updateUser } from "@/lib/actions/user.action";
 import { usePathname, useRouter } from "next/navigation";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   user: string;
@@ -58,6 +59,10 @@ const Page = ({ user, clerkId }: Props) => {
         },
         path: pathname,
       });
+      toast({
+        title: "Profile Updated",
+        description: "The profile has successfully Updated.",
+      });
       route.back();
     } catch (error) {
       console.log(error);
@@ -76,7 +81,7 @@ const Page = ({ user, clerkId }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel>
+              <FormLabel className="text-dark100_light900 ">
                 Full Name<span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -97,7 +102,7 @@ const Page = ({ user, clerkId }: Props) => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className="text-dark100_light900 ">
                 Username<span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -118,7 +123,9 @@ const Page = ({ user, clerkId }: Props) => {
           name="portfolioLink"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>portfolio Link</FormLabel>
+              <FormLabel className="text-dark100_light900 ">
+                portfolio Link
+              </FormLabel>
               <FormControl>
                 <Input
                   type="url"
@@ -137,7 +144,7 @@ const Page = ({ user, clerkId }: Props) => {
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className="text-dark100_light900 ">
                 Location<span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>
@@ -156,7 +163,7 @@ const Page = ({ user, clerkId }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className="text-dark100_light900 ">
                 Bio<span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl>

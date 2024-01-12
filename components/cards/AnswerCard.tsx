@@ -18,7 +18,7 @@ interface Props {
     name: string;
     picture: string;
   };
-  upvotes: number;
+  upvotes: string[];
   createdAt: Date;
 }
 
@@ -34,7 +34,7 @@ const AnswerCard = ({
 
   return (
     <Link
-      href={`/question/${question?._id}/#${_id}`}
+      href={`/question/${question._id}/#${_id}`}
       className="card-wrapper rounded-[10px] px-11 py-9"
     >
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -69,7 +69,7 @@ const AnswerCard = ({
           <Metric
             imgUrl="/assets/icons/like.svg"
             alt="like icon"
-            value={formatAndDivideNumber(upvotes)}
+            value={formatAndDivideNumber(upvotes.length)}
             title=" Votes"
             textStyles="small-medium text-dark400_light800"
           />

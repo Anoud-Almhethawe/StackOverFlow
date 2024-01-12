@@ -59,10 +59,10 @@ export async function createAnswer(params: CreateAnswerParams) {
     });
 
     await Interaction.create({
-      user: author,
+      userId: author,
       action: "answer",
-      question,
-      answer: newAnswer._id,
+      questionId: question,
+      answerId: newAnswer._id,
       tags: questionObject.tags,
     });
 
@@ -79,7 +79,7 @@ export async function getAnswers(params: GetAnswersParams) {
   try {
     connectToDatabase();
 
-    const { questionId, sortBy, page = 1, pageSize = 2 } = params;
+    const { questionId, sortBy, page = 1, pageSize = 10 } = params;
 
     const skipAmount = (page - 1) * pageSize;
 
@@ -174,7 +174,7 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
     let updateQuery = {};
 
     if (hasdownVoted) {
-      updateQuery = { $pull: { downvote: userId } };
+      updateQuery = { $pull: { downvotes: userId } };
     } else if (hasupVoted) {
       updateQuery = {
         $pull: { upvotes: userId },

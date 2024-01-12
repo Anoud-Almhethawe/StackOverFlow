@@ -8,6 +8,11 @@ import React from "react";
 
 import { getQuestionsByTagId } from "@/lib/actions/tag.action";
 import Pagination from "@/components/shared/Pagination";
+
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Tags | DevFlow",
+};
 const Page = async ({ params, searchParams }: any) => {
   const result = await getQuestionsByTagId({
     tagId: params.id,
