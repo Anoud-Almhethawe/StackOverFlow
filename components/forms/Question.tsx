@@ -222,6 +222,10 @@ const Question = ({ mongouserId, questionDetails, type }: Props) => {
             <FormItem className="flex w-full flex-col">
               <FormLabel className="paragraph-semibold text-dark400_light800">
                 Tags <span className="text-primary-500">*</span>
+                <span className="text-slate-600/50">
+                  {" "}
+                  Enter your tag and press enter.
+                </span>
               </FormLabel>
               <FormControl className="mt-3.5">
                 <>
