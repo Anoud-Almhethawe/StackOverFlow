@@ -74,6 +74,50 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>DevFlow</title>
+        <meta
+          name="description"
+          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+        />
+
+        <meta itemProp="name" content="DevFlow" />
+        <meta
+          itemProp="description"
+          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+        />
+        <meta
+          itemProp="image"
+          content="http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png"
+        />
+
+        <meta
+          property="og:url"
+          content="https://dev-dverflow-app-nextjs14.vercel.app"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="DevFlow" />
+        <meta
+          property="og:description"
+          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+        />
+        <meta
+          property="og:image"
+          content="http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="DevFlow" />
+        <meta
+          name="twitter:description"
+          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+        />
+        <meta
+          name="twitter:image"
+          content="http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png"
+        />
+      </head>
+
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
         <ClerkProvider
           appearance={{
