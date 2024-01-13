@@ -9,10 +9,45 @@ import { ThemeProvider } from "@/context/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "DevFlow",
+  applicationName: "DevFlow",
   description:
     "A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more",
   icons: {
     icon: "/assets/images/site-logo.svg",
+  },
+  authors: [
+    { name: "Anoud", url: "https://dev-dverflow-app-nextjs14.vercel.app/" },
+  ],
+  keywords: [
+    "programming",
+    "web development",
+    "community",
+    "Questions",
+    "developers",
+    "tags",
+    "answers",
+  ],
+  referrer: "origin",
+  viewport: { width: "device-width", initialScale: 1 },
+  creator: "Anoud",
+  publisher: "DevFlow",
+  robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://dev-dverflow-app-nextjs14.vercel.app/",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://dev-dverflow-app-nextjs14.vercel.app/",
+    title: "DevFlow",
+    description: "A community-driven platform for developers",
+    siteName: "DevFlow",
+    images: [{ url: "/assets/icons/devflowpng.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "https://dev-dverflow-app-nextjs14.vercel.app/",
+    creator: "@Anoud",
+    images: "/assets/icons/devflowpng.png",
   },
 };
 
