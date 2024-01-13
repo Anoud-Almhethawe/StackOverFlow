@@ -1,59 +1,59 @@
 import { ClerkProvider } from "@clerk/nextjs";
 // eslint-disable-next-line camelcase
 import { Inter, Space_Grotesk } from "next/font/google";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import "./globals.css";
 import "../styles/prism.css";
 import React from "react";
 import { ThemeProvider } from "@/context/ThemeProvider";
 
-export const metadata: Metadata = {
-  title: "DevFlow",
-  applicationName: "DevFlow",
-  description:
-    "A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more",
-  icons: {
-    icon: "/assets/images/site-logo.svg",
-  },
-  authors: [
-    { name: "Anoud", url: "https://dev-dverflow-app-nextjs14.vercel.app/" },
-  ],
-  keywords: [
-    "programming",
-    "web development",
-    "community",
-    "Questions",
-    "developers",
-    "tags",
-    "answers",
-  ],
-  referrer: "origin",
-  viewport: { width: "device-width", initialScale: 1 },
-  creator: "Anoud",
-  publisher: "DevFlow",
-  robots: { index: true, follow: true },
-  alternates: {
-    canonical: "https://dev-dverflow-app-nextjs14.vercel.app/",
-  },
-  openGraph: {
-    type: "website",
-    url: "https://dev-dverflow-app-nextjs14.vercel.app/",
-    title: "DevFlow",
-    description: "A community-driven platform for developers",
-    siteName: "DevFlow",
-    images: [
-      {
-        url: "https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "https://dev-dverflow-app-nextjs14.vercel.app/",
-    creator: "@Anoud",
-    images: "https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "Home | DevFlow ",
+//   applicationName: "DevFlow",
+//   description:
+//     "A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more",
+//   icons: {
+//     icon: "/assets/images/site-logo.svg",
+//   },
+//   authors: [
+//     { name: "Anoud", url: "https://dev-dverflow-app-nextjs14.vercel.app/" },
+//   ],
+//   keywords: [
+//     "programming",
+//     "web development",
+//     "community",
+//     "Questions",
+//     "developers",
+//     "tags",
+//     "answers",
+//   ],
+//   referrer: "origin",
+//   viewport: { width: "device-width", initialScale: 1 },
+//   creator: "Anoud",
+//   publisher: "DevFlow",
+//   robots: { index: true, follow: true },
+//   alternates: {
+//     canonical: "https://dev-dverflow-app-nextjs14.vercel.app/",
+//   },
+//   openGraph: {
+//     type: "website",
+//     url: "https://dev-dverflow-app-nextjs14.vercel.app/",
+//     title: "DevFlow",
+//     description: "A community-driven platform for developers",
+//     siteName: "DevFlow",
+//     images: [
+//       {
+//         url: "https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg",
+//       },
+//     ],
+//   },
+//   twitter: {
+//     card: "summary_large_image",
+//     site: "https://dev-dverflow-app-nextjs14.vercel.app/",
+//     creator: "@Anoud",
+//     images: "https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg",
+//   },
+// };
 
 const inter = Inter({
   subsets: ["latin"],
@@ -74,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>DevFlow - Ask, Answer & Collaborate</title>
+        <title> DevFlow - Ask, Answer & Collaborate </title>
         <meta
           name="description"
           content="A vibrant coding ecosystem where questions spark curiosity, answers fuel knowledge, and collaboration ignites innovation. DevFlow is more than a platform; it's a dynamic community where programmers from every corner of the globe come together to explore the realms of web development, mobile app creation, algorithms, and the intricate structures of code. Join us in the journey of asking, answering, and collaborating — where the flow of ideas converges into a symphony of shared expertise and collective growth."
