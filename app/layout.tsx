@@ -41,13 +41,18 @@ export const metadata: Metadata = {
     title: "DevFlow",
     description: "A community-driven platform for developers",
     siteName: "DevFlow",
-    images: [{ url: "/assets/icons/devflowpng.png" }],
+    images: [
+      {
+        url: "http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     site: "https://dev-dverflow-app-nextjs14.vercel.app/",
     creator: "@Anoud",
-    images: "/assets/icons/devflowpng.png",
+    images:
+      "http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png",
   },
 };
 
