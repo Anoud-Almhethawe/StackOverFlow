@@ -74,16 +74,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>DevFlow</title>
+        <title>DevFlow - Ask, Answer & Collaborate</title>
         <meta
           name="description"
-          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+          content="A vibrant coding ecosystem where questions spark curiosity, answers fuel knowledge, and collaboration ignites innovation. DevFlow is more than a platform; it's a dynamic community where programmers from every corner of the globe come together to explore the realms of web development, mobile app creation, algorithms, and the intricate structures of code. Join us in the journey of asking, answering, and collaborating — where the flow of ideas converges into a symphony of shared expertise and collective growth."
         />
 
-        <meta itemProp="name" content="DevFlow" />
+        <meta itemProp="name" content="DevFlow - Ask, Answer & Collaborate" />
         <meta
           itemProp="description"
-          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+          content="A vibrant coding ecosystem where questions spark curiosity, answers fuel knowledge, and collaboration ignites innovation. DevFlow is more than a platform; it's a dynamic community where programmers from every corner of the globe come together to explore the realms of web development, mobile app creation, algorithms, and the intricate structures of code. Join us in the journey of asking, answering, and collaborating — where the flow of ideas converges into a symphony of shared expertise and collective growth."
         />
         <meta
           itemProp="image"
@@ -95,10 +95,13 @@ export default function RootLayout({
           content="https://dev-dverflow-app-nextjs14.vercel.app"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="DevFlow" />
+        <meta
+          property="og:title"
+          content="DevFlow - Ask, Answer & Collaborate"
+        />
         <meta
           property="og:description"
-          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+          content="A vibrant coding ecosystem where questions spark curiosity, answers fuel knowledge, and collaboration ignites innovation. DevFlow is more than a platform; it's a dynamic community where programmers from every corner of the globe come together to explore the realms of web development, mobile app creation, algorithms, and the intricate structures of code. Join us in the journey of asking, answering, and collaborating — where the flow of ideas converges into a symphony of shared expertise and collective growth."
         />
         <meta
           property="og:image"
@@ -106,10 +109,13 @@ export default function RootLayout({
         />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="DevFlow" />
+        <meta
+          name="twitter:title"
+          content="DevFlow - Ask, Answer & Collaborate"
+        />
         <meta
           name="twitter:description"
-          content="A community-driven platform for asking and answering programming questions get help share knowledge and collaborate with developers from around the world Explore topics in web development mobile app development algorithms data structure and more"
+          content="A vibrant coding ecosystem where questions spark curiosity, answers fuel knowledge, and collaboration ignites innovation. DevFlow is more than a platform; it's a dynamic community where programmers from every corner of the globe come together to explore the realms of web development, mobile app creation, algorithms, and the intricate structures of code. Join us in the journey of asking, answering, and collaborating — where the flow of ideas converges into a symphony of shared expertise and collective growth."
         />
         <meta
           name="twitter:image"
