@@ -1,6 +1,11 @@
 import NoResult from "@/components/shared/NoResult";
 import React from "react";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Find a Job | DevFlow",
+};
 const page = () => {
   return (
     <NoResult
