@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     siteName: "DevFlow",
     images: [
       {
-        url: "http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png",
+        url: "https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg",
       },
     ],
   },
@@ -51,8 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "https://dev-dverflow-app-nextjs14.vercel.app/",
     creator: "@Anoud",
-    images:
-      "http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png",
+    images: "https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg",
   },
 };
 
@@ -88,7 +87,7 @@ export default function RootLayout({
         />
         <meta
           itemProp="image"
-          content="http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png"
+          content="https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg"
         />
 
         <meta
@@ -103,7 +102,7 @@ export default function RootLayout({
         />
         <meta
           property="og:image"
-          content="http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png"
+          content="https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -114,7 +113,7 @@ export default function RootLayout({
         />
         <meta
           name="twitter:image"
-          content="http://dev-dverflow-app-nextjs14-gaqypa5fe-almhethaweanoud-gmailcom.vercel.app/assets/icons/devflowpng.png"
+          content="https://dev-dverflow-app-nextjs14.vercel.app/assets/meta.jpeg"
         />
       </head>
 
